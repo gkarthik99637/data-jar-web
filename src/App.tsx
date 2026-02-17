@@ -1,28 +1,23 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { 
-  ChevronRight, 
-  ChevronLeft, 
-  Plus, 
-  Trash2, 
-  MoreHorizontal, 
-  FileJson, 
-  Download, 
-  Upload, 
-  X, 
-  Check, 
-  Search,
-  Hash,
-  Type,
-  ToggleLeft,
-  List as ListIcon,
-  Folder,
-  Calculator,
-  AlertCircle,
-  Link,
-  Copy,
-  Zap,
-  Play,
-  Save
+    ChevronRight, 
+    Plus, 
+    Trash2, 
+    Download, 
+    Upload, 
+    X, 
+    Check, 
+    Hash,
+    Type,
+    ToggleLeft,
+    List as ListIcon,
+    Folder,
+    Calculator,
+    AlertCircle,
+    Link,
+    Copy,
+    Zap,
+    Play
 } from 'lucide-react';
 
 // --- Types ---
@@ -76,7 +71,7 @@ const evaluateExpression = (expression: string, root: DataNode[]): { result: any
   let hasReferences = false;
 
   try {
-    resolvedString = expression.replace(referenceRegex, (match, path) => {
+    resolvedString = expression.replace(referenceRegex, (_match, path) => {
       hasReferences = true;
       const node = resolvePath(root, path);
       
@@ -399,11 +394,6 @@ export default function App() {
     setNewItemValue('');
   };
 
-  const getBreadcrumbPathString = (nodeName: string) => {
-    const parentPath = path.map(p => p.name).join('.');
-    return parentPath ? `${parentPath}.${nodeName}` : nodeName;
-  };
-  
   const handleExport = () => {
     const exportObj = exportData(data);
     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj, null, 2));
